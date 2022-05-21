@@ -143,8 +143,8 @@ plt.show()
 
 You may find that the smile is a little bit weird (the shape near ATM is very sharp, and the curvature is downward). It is because we choose linear interpolation instead of other smooth interpolation methods commonly used by traders. But one can easily replace `ql.LinearInterpolation` with `ql.CubicNaturalSpline` to align with market practice.
 
-The ATM point is defined as the strike level where a option straddle has zero delta. This strike can be calculated by using $\Delta_{Call}+{\Delta}_{Put}=0$. After some simple computation steps, the ATM strike will be
-$${K}_{ATM} = {S}{e}^{r-q+\frac{\sigma^{2}}{2}{T}}$$
+The ATM point is defined as the strike level where a option straddle has zero delta. This strike can be calculated by using $\Delta_{Call}+\Delta_{Put}=0$. After some simple computation steps, the ATM strike will be
+$$K_{ATM} = {S}{e}^{r-q+\frac{\sigma^{2}}{2}{T}}$$
 This ATM strike is slightly away from the forward price, here we will compute ${K}_{ATM}$ and its corresponding volatility to check this fact.
 
 
@@ -165,8 +165,8 @@ print(f'ATM volatility = \t{vts.blackVol(display_maturity, 1.0)}')
 
 # 2. Quoted in Premium-included Delta
 Deltas with premium are used in quotation where the premium is paid in base currency (ccy1) for a currency pair. For example, for pairs containing USD, USD is the premium currency except in the cases of EUR-, GBP, AUD- and NZD-.
-In this type of quotation, premium is deducted from the Black-Scholes delta. The reason is, for dynamic hedging, option seller need to hold ${\Delta}$ unit of ccy1 (asset), he has already received the premium of $\frac{{V}_{ccy1}}{S}$ in ccy1, therefore he only needs to buy ${\Delta}-\frac{{V}_{ccy1}}{S}$ unit of ccy1.
-In this case, before we do our interpolation on ${\Delta}$ dimension, we need to convert the permium-included delta into a pure delta. QuantLib's `BlackDeltaCalculator` class can help us. We initialize this class with `dt=ql.DeltaVolQuote.PaSpot` to tell it premium-included delta is in used.
+In this type of quotation, premium is deducted from the Black-Scholes delta. The reason is, for dynamic hedging, option seller need to hold $\Delta$ unit of ccy1 (asset), he has already received the premium of $\frac{V_{ccy1}}{S}$ in ccy1, therefore he only needs to buy $\Delta-\frac{V_{ccy1}}{S}$ unit of ccy1.
+In this case, before we do our interpolation on $\Delta$ dimension, we need to convert the permium-included delta into a pure delta. QuantLib's `BlackDeltaCalculator` class can help us. We initialize this class with `dt=ql.DeltaVolQuote.PaSpot` to tell it premium-included delta is in used.
 
 Here we revise the `TargetFun` by adding a loop to convert premium-included delta to pure delta. We use `BlackDeltaCalculator(dt=ql.DeltaVolQuote.PaSpot, ...)` and `.strikeFormDelta` to obtain `k` then `BlackDeltaCalculator(dt=ql.DeltaVolQuote.Spot, ...)` and `.deltaFromStrike` to get pure `deltas`.
 
@@ -258,7 +258,7 @@ plt.show()
 
 ## 3. Put Delta vs Call Delta
 Here we want to explain the reason of choosing put deltas instead of call deltas for interpolation.
-For a call option, premium-included delta is its B.S. delta less option premium or ${\Delta}_{Call}-\frac{{V}_{ccy1}}{S}$. For an in-of-money options, $\frac{{V}_{ccy1}}{S}$ can be relatively large compared to ${\Delta}_{Call}$, so the ${\Delta}_{Call}^{Pa}({K})$ is not a monotone function. In this case, the convertion from $K$ to ${\Delta}_{Call}^{Pa}$ is not unique, which may lead to undesired result.
+For a call option, premium-included delta is its B.S. delta less option premium or $\Delta_{Call}-\frac{V_{ccy1}}{S}$. For an in-of-money options, $\frac{V_{ccy1}}{S}$ can be relatively large compared to $\Delta_{Call}$, so the $\Delta_{Call}^{Pa}(K)$ is not a monotone function. In this case, the convertion from $K$ to $\Delta_{Call}^{Pa}$ is not unique, which may lead to undesired result.
 
 
 ```python
@@ -280,7 +280,7 @@ plt.show()
 ![png](output_14_0.png)
 
 
-In contrast, ${\Delta}_{Put}-\frac{{V}_{ccy1}}{S}$ is monotone to $K$, because ${\Delta}_{Put}$ is always negative.
+In contrast, $\Delta_{Put}-\frac{V_{ccy1}}{S}$ is monotone to $K$, because $\Delta_{Put}$ is always negative.
 
 
 ```python
