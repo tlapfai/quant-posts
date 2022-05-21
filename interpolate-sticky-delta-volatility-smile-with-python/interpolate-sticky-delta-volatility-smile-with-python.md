@@ -41,7 +41,7 @@ Striky-delta is the quotation form that has delta for x-axis and volatility for 
 
 $${\Delta}_{put}(K,{\sigma}) = {e}^{-(r-q)t}N(-\frac{ln(\frac{S}{K})+(r-q+\frac{{\sigma}^2}{2})t}{{\sigma}\sqrt{t}})$$
 
-Therefore, we need an initial guess of $\sigma_{1}$ as input together with $K$, and obtain ${\Delta}_{put}$ then interpolate $\sigma$ from the ${\Delta}$-${\sigma}$ quotation. Usually ${\sigma}_{ATM}$ is chosen to be the initial guess. The output ${\sigma}_{2}$ will be different from our input ${\sigma}_{1}$, so that we use ${\sigma}_{2}$ as input and repeat the step, until the input ${\sigma}_{n}$ and ouput ${\sigma}_{n+1}$ are close enough.
+Therefore, we need an initial guess of $\sigma_{1}$ as input together with $K$, and obtain $\Delta_{put}$ then interpolate $\sigma$ from the $\Delta$-$\sigma$ quotation. Usually $\sigma_{ATM}$ is chosen to be the initial guess. The output ${\sigma}_{2}$ will be different from our input ${\sigma}_{1}$, so that we use ${\sigma}_{2}$ as input and repeat the step, until the input ${\sigma}_{n}$ and ouput ${\sigma}_{n+1}$ are close enough.
 
 Let's setup a target function (as a class) for recurrsion. All the parameters are decided in `__init__` except ${\sigma}$ (argument `v0`). For the convertion from ${K}$ to ${\Delta}$, we leverage `BlackDeltaCalculator` class in QuantLib. This class has a method `deltaFromStrike` doing the convertion.
 
