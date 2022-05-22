@@ -1,12 +1,12 @@
 
 # Interpolate Sticky-Delta Volatility Smile with Python
 
-In OTC FX option market, volatility smiles are quoted in a delta-volatilty instead of strike-volatility convention in equity option market. For pricing a given option, when one prepares volatility as a parameter in a Black-Scholes formula, they need to calculate the volatility for the given strike price from delta-volatility quotation.
+In the OTC FX options market, volatility smiles are quoted in a delta-volatility instead of the strike-volatility convention in the equity options market. For pricing a given option, when one prepares volatility as a parameter in a Black-Scholes formula, they need to calculate the volatility for the given strike price from the delta-volatility quotation.
 
 ## 1. Quoted in Delta (premium excluded)
-Premium excluded delta is the case where the premium is paid in the quoted currency (ccy2) of a currency pair, for example EUR/USD. Here the deltas can be used for interpolation without any adjustment.
+Premium excluded delta is the case where the premium is paid in the quoted currency (ccy2) of a currency pair, for example, EUR/USD. Here the deltas can be used for interpolation without any adjustment.
 
-First, setup the market data.
+First, set up the market data.
 You may notice that negative deltas are used, which means they are deltas of put. The reason will be explained in the section for premium included delta.
 
 
