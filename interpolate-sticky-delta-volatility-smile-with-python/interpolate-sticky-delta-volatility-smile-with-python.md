@@ -37,7 +37,7 @@ spot = 1.1
 strike = 1.2
 ```
 
-Striky-delta is the quotation form that has delta for x-axis and volatility for y-axis. When we price a option with given strike, we firstly need to convert the strike to delta then map it to volatility. However, the delta formula needs both strike and volatility as inputs.
+Sticky-delta is the quotation form that has a delta for the x-axis and volatility for the y-axis. When we price an option with a given strike, we first need to convert the strike to delta and then map it to volatility. However, the delta formula needs both strike and volatility as inputs.
 
 $$\Delta_{put}(K,\sigma) = {e}^{-(r-q)t}N(-\frac{ln(\frac{S}{K})+(r-q+\frac{\sigma^2}{2})t}{\sigma\sqrt{t}})$$
 
